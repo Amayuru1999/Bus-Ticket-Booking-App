@@ -1,3 +1,4 @@
+import 'package:busticketbooking/bus_booking_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,6 +17,21 @@ class _BusBookingMainPageState extends State<BusBookingMainPage> {
     return Consumer(builder: (context, ref, _) {
       final index = ref.watch(busTicketAppMenuIndex);
       return Scaffold(
+        body: SafeArea(
+          top: true,
+          child: IndexedStack(
+            index: index,
+            children: [
+              const BusBookingHomeScreen(),
+              Center(
+                child: Text("$index"),
+              ),
+              Center(
+                child: Text("$index"),
+              ),
+            ],
+          ),
+        ),
         bottomNavigationBar: SizedBox(
           height: 80,
           child: BottomNavigationBar(
@@ -41,7 +57,7 @@ class _BusBookingMainPageState extends State<BusBookingMainPage> {
                 icon: Icon(
                   Icons.person_2,
                 ),
-                label: "Tickets",
+                label: "Profile",
               ),
               // label:"Booking",
             ],
