@@ -36,7 +36,7 @@ class _BusBookingMainPageState extends State<BusBookingMainPage> {
           height: 80,
           child: BottomNavigationBar(
             elevation: 4,
-            selectedItemColor: Colors.red,
+            selectedItemColor: const Color.fromARGB(255, 2, 48, 255),
             currentIndex: index,
             onTap: (idx) =>
                 ref.read(busTicketAppMenuIndex.notifier).state = idx,

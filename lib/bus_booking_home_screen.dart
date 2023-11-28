@@ -61,7 +61,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                         child: tripType
                             ? Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: Colors.blueAccent,
                                   borderRadius: BorderRadius.circular(32),
                                 ),
                                 child: const Center(
@@ -96,7 +96,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                         child: !tripType
                             ? Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: Colors.blueAccent,
                                   borderRadius: BorderRadius.circular(32),
                                 ),
                                 child: const Center(
@@ -226,7 +226,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                       child: const Center(
                         child: CircleAvatar(
                           radius: 32,
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.blueAccent,
                           foregroundColor: Colors.white,
                           child: Icon(
                             Icons.sync,
@@ -311,7 +311,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),
                     border: Border.all(
-                      color: Colors.red,
+                      color: Colors.blueAccent,
                       width: 1.5,
                     ),
                   ),
@@ -367,31 +367,36 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
               onTap: () {
                 context.push("/detail");
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(48),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      "Search for Trips",
-                      style: TextStyle(
-                        fontSize: 18,
+              child: GestureDetector(
+                onTap: () {
+                  context.push("/detail");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(48),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.search,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        "Search for Trips",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )
