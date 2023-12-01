@@ -544,7 +544,6 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
 
 class _TakenSeatComponent extends StatelessWidget {
   const _TakenSeatComponent({
-    super.key,
     this.marginRight = 0.0,
   });
   final double? marginRight;
@@ -574,7 +573,6 @@ class _GeneralSeatComponent extends StatelessWidget {
   final double? marginRight;
 
   const _GeneralSeatComponent({
-    super.key,
     this.title,
     this.borderColor = Colors.red,
     this.marginRight = 0.0,
@@ -597,7 +595,7 @@ class _GeneralSeatComponent extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "${title}",
+          "$title",
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
