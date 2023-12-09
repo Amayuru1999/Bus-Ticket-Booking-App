@@ -2,14 +2,11 @@ import 'package:busticketbooking/firebase_auth_implementaion/firebase_auth_servi
 import 'package:busticketbooking/form_container_widget.dart';
 import 'package:busticketbooking/global/common/toast.dart';
 import 'package:busticketbooking/sign_up_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
