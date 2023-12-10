@@ -1,18 +1,23 @@
+import 'dart:io';
 import 'package:busticketbooking/firebase_auth_implementaion/firebase_auth_services.dart';
 import 'package:busticketbooking/form_container_widget.dart';
 import 'package:busticketbooking/global/common/toast.dart';
 import 'package:busticketbooking/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // If you're using Firestore
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final ImagePicker _picker = ImagePicker();
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   final TextEditingController _usernameController = TextEditingController();
@@ -20,6 +25,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool isSigningUp = false;
+  XFile? _imageFile;
+  DateTime? _selectedDate;
 
   @override
   void dispose() {
@@ -75,6 +82,44 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               GestureDetector(
                 onTap: () {
+                  _selectImage();
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 100,
+                  color: Colors.grey[300],
+                  child: Center(
+                    child: _imageFile == null
+                        ? const Text('Select Profile Image')
+                        : Image.file(File(_imageFile!.path)),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  _selectDate(context);
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  color: Colors.grey[300],
+                  child: Center(
+                    child: _selectedDate == null
+                        ? const Text('Select Birthday')
+                        : Text(
+                            'Selected Date: ${_selectedDate!.toString()}',
+                          ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
                   _signUp();
                 },
                 child: Container(
@@ -85,16 +130,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                      child: isSigningUp
-                          ? const CircularProgressIndicator(
+                    child: isSigningUp
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : const Text(
+                            "Sign Up",
+                            style: TextStyle(
                               color: Colors.white,
-                            )
-                          : const Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -108,25 +155,61 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: 5,
                   ),
                   GestureDetector(
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
-                            (route) => false);
-                      },
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ))
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false,
+                      );
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _selectImage() async {
+    try {
+      final XFile? pickedImage =
+          await _picker.pickImage(source: ImageSource.gallery);
+
+      if (pickedImage != null) {
+        setState(() {
+          _imageFile = pickedImage;
+        });
+      }
+    } catch (e) {
+      print('Error selecting image: $e');
+      // Handle the error here, show a message, or perform necessary actions
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    }
   }
 
   void _signUp() async {
@@ -138,16 +221,50 @@ class _SignUpPageState extends State<SignUpPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    try {
+      // Upload image to Firebase Storage
+      if (_imageFile != null) {
+        Reference storageReference = FirebaseStorage.instance
+            .ref()
+            .child('user_images')
+            .child('user_${DateTime.now().millisecondsSinceEpoch}.jpg');
 
-    setState(() {
-      isSigningUp = false;
-    });
-    if (user != null) {
-      showToast(message: "User is successfully created");
-      Navigator.pushNamed(context, "/home");
-    } else {
-      showToast(message: "Some error happend");
+        UploadTask uploadTask =
+            storageReference.putFile(File(_imageFile!.path));
+
+        TaskSnapshot snapshot = await uploadTask;
+        String imageUrl = await snapshot.ref.getDownloadURL();
+
+        // Save user data and image URL in Firebase Database
+        // For example, assuming you have a 'users' collection in Firestore
+        await FirebaseFirestore.instance.collection('users').doc(email).set({
+          'username': username,
+          'email': email,
+          'imageUrl': imageUrl,
+          // You can also save other user data like birthday (_selectedDate) here
+        });
+
+        User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+        setState(() {
+          isSigningUp = false;
+        });
+
+        if (user != null) {
+          showToast(message: "User is successfully created");
+          Navigator.pushNamed(context, "/home");
+        } else {
+          showToast(message: "Some error happened");
+        }
+      } else {
+        showToast(message: "Please select a profile image");
+      }
+    } catch (e) {
+      print('Error signing up: $e');
+      setState(() {
+        isSigningUp = false;
+      });
+      showToast(message: "Error signing up");
     }
   }
 }

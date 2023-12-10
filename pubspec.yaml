@@ -48,6 +48,8 @@ dependencies:
   fluttertoast: ^8.2.4
   google_sign_in: ^6.1.6
   toast: ^0.3.0
+  image_picker: ^1.0.4
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:
