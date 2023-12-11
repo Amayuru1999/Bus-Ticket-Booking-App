@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      color: Colors.blueAccent,
       title: 'Flutter Firebase',
       routes: {
         '/': (context) => const SplashScreen(

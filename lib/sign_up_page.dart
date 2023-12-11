@@ -126,7 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: double.infinity,
                   height: 45,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: const Color.fromRGBO(33, 150, 243, 1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
@@ -222,49 +222,42 @@ class _SignUpPageState extends State<SignUpPage> {
     String password = _passwordController.text;
 
     try {
-      // Upload image to Firebase Storage
-      if (_imageFile != null) {
-        Reference storageReference = FirebaseStorage.instance
-            .ref()
-            .child('user_images')
-            .child('user_${DateTime.now().millisecondsSinceEpoch}.jpg');
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-        UploadTask uploadTask =
-            storageReference.putFile(File(_imageFile!.path));
+      if (userCredential.user != null) {
+        if (_imageFile != null) {
+          String userId = userCredential.user!.uid;
+          Reference storageReference = FirebaseStorage.instance
+              .ref()
+              .child('user_images')
+              .child('user_$userId.jpg');
 
-        TaskSnapshot snapshot = await uploadTask;
-        String imageUrl = await snapshot.ref.getDownloadURL();
+          await storageReference.putFile(File(_imageFile!.path));
+          // Get the download URL of the uploaded image
+          String imageUrl = await storageReference.getDownloadURL();
 
-        // Save user data and image URL in Firebase Database
-        // For example, assuming you have a 'users' collection in Firestore
-        await FirebaseFirestore.instance.collection('users').doc(email).set({
-          'username': username,
-          'email': email,
-          'imageUrl': imageUrl,
-          // You can also save other user data like birthday (_selectedDate) here
-        });
+          // Now you can save the imageUrl along with other user details in your database or perform necessary operations
+          // For example, you might use Firebase Firestore or Firebase Realtime Database to store user data
+          // Here, we're just printing the imageUrl
+          print('Image URL: $imageUrl');
 
-        User? user = await _auth.signUpWithEmailAndPassword(email, password);
-
-        setState(() {
-          isSigningUp = false;
-        });
-
-        if (user != null) {
-          showToast(message: "User is successfully created");
+          // Show a success message
+          showToast(message: "User is successfully created with image");
           Navigator.pushNamed(context, "/home");
         } else {
-          showToast(message: "Some error happened");
+          showToast(message: "Please select an image");
         }
-      } else {
-        showToast(message: "Please select a profile image");
       }
     } catch (e) {
-      print('Error signing up: $e');
-      setState(() {
-        isSigningUp = false;
-      });
-      showToast(message: "Error signing up");
+      showToast(message: "Error creating user: $e");
     }
+
+    setState(() {
+      isSigningUp = false;
+    });
   }
 }
