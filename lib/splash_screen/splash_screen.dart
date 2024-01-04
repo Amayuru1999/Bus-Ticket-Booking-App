@@ -11,7 +11,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1000), () {
+    Future.delayed(const Duration(seconds: 10), () {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => widget.child!),
@@ -29,16 +29,22 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Bus Go",
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.bold,
-                fontSize: 60,
-                color: Colors.black,
+            const Padding(
+              padding: EdgeInsets.zero, // Padding set to zero
+              child: Text(
+                "Bus Go",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 60,
+                  color: Colors.black,
+                ),
               ),
             ),
-            const SizedBox(height: 0),
+            const SizedBox(
+              height:
+                  0, // Adjusted height between "Bus Go" and "Navigate. Book. Go."
+            ),
             const Text(
               "Navigate. Book. Go.",
               style: TextStyle(
@@ -49,8 +55,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(
-              height: 8,
-            ), // Adjust the spacing between the text and image
+              height: 4, // Adjusted spacing between the text and image
+            ),
             Transform.rotate(
               angle: 90 * 3.14159265359 / 180, // Rotate by 90 degrees clockwise
               child: Image.asset(
