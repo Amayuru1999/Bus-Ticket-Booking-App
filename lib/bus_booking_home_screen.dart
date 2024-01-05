@@ -1,9 +1,10 @@
+import 'package:busticketbooking/bus_booking_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BusBookingHomeScreen extends StatefulWidget {
-  const BusBookingHomeScreen({super.key});
+  const BusBookingHomeScreen(Text text, {super.key});
 
   @override
   State<BusBookingHomeScreen> createState() => _BusBookingHomeScreenState();
@@ -14,6 +15,8 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
   int _counter = 0;
   final TextEditingController _fromTec = TextEditingController();
   final TextEditingController _toTec = TextEditingController();
+  DateTime? selectedDate;
+  DateTime? returnDate;
 
   @override
   Widget build(BuildContext context) {
@@ -238,15 +241,15 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 32),
               child: Row(
                 children: [
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Date',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -254,14 +257,21 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          "01.11.2022",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                        GestureDetector(
+                          onTap: () {
+                            _selectDate(context, isReturnDate: false);
+                          },
+                          child: Text(
+                            selectedDate != null
+                                ? "${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}"
+                                : "Set date",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ],
@@ -271,7 +281,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Returning',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -279,14 +289,21 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          "Set date",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                        GestureDetector(
+                          onTap: () {
+                            _selectDate(context, isReturnDate: true);
+                          },
+                          child: Text(
+                            returnDate != null
+                                ? "${returnDate!.day}.${returnDate!.month}.${returnDate!.year}"
+                                : "Set date",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ],
@@ -365,44 +382,64 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
             ),
             GestureDetector(
               onTap: () {
-                context.push("/detail");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BusBookingDetailPage(),
+                  ),
+                );
               },
-              child: GestureDetector(
-                onTap: () {
-                  context.push("/detail");
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(48),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(48),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      "Search for Trips",
+                      style: TextStyle(
+                        fontSize: 18,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        "Search for Trips",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context,
+      {bool isReturnDate = false}) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+
+    if (picked != null) {
+      setState(() {
+        if (!isReturnDate) {
+          selectedDate = picked;
+        } else {
+          returnDate = picked;
+        }
+      });
+    }
   }
 }

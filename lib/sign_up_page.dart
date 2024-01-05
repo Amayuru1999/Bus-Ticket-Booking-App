@@ -44,8 +44,9 @@ class _SignUpPageState extends State<SignUpPage> {
         title: const Text("SignUp"),
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -177,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 
@@ -229,6 +230,15 @@ class _SignUpPageState extends State<SignUpPage> {
       );
 
       if (userCredential.user != null) {
+        String userId = userCredential.user!.uid; // Get the user's unique ID
+
+        // Save user details to Firestore under 'users' collection
+        await FirebaseFirestore.instance.collection('users').doc(userId).set({
+          'username': username,
+          'email': email,
+          // Other user details like birthday, profile image URL, etc., can be added here
+        });
+
         if (_imageFile != null) {
           String userId = userCredential.user!.uid;
           Reference storageReference = FirebaseStorage.instance

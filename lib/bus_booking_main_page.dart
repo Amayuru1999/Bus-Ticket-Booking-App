@@ -1,6 +1,7 @@
 import 'package:busticketbooking/bus_booking_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 final busTicketAppMenuIndex = StateProvider<int>((ref) => 0);
 
@@ -12,6 +13,18 @@ class BusBookingMainPage extends StatefulWidget {
 }
 
 class _BusBookingMainPageState extends State<BusBookingMainPage> {
+  String? userEmail; // Store user's email
+
+  @override
+  void initState() {
+    super.initState();
+    // Retrieve user's email (assuming you're using Firebase Authentication)
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userEmail = user.email;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
@@ -22,7 +35,9 @@ class _BusBookingMainPageState extends State<BusBookingMainPage> {
           child: IndexedStack(
             index: index,
             children: [
-              const BusBookingHomeScreen(),
+              const BusBookingHomeScreen(
+                Text('Your Title Here'),
+              ),
               Center(
                 child: Text("$index"),
               ),
