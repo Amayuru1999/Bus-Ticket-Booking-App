@@ -236,6 +236,7 @@ class _SignUpPageState extends State<SignUpPage> {
         await FirebaseFirestore.instance.collection('users').doc(userId).set({
           'username': username,
           'email': email,
+          'dob': _selectedDate.toString()
           // Other user details like birthday, profile image URL, etc., can be added here
         });
 
@@ -254,10 +255,16 @@ class _SignUpPageState extends State<SignUpPage> {
           // For example, you might use Firebase Firestore or Firebase Realtime Database to store user data
           // Here, we're just printing the imageUrl
           print('Image URL: $imageUrl');
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .update({
+            'image': imageUrl, // Add the image URL to the user document
+          });
 
           // Show a success message
           showToast(message: "User is successfully created with image");
-          Navigator.pushNamed(context, "/home");
+          Navigator.pushNamed(context, "/bus_booking_main_page");
         } else {
           showToast(message: "Please select an image");
         }
