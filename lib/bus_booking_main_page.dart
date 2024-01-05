@@ -1,4 +1,5 @@
 import 'package:busticketbooking/bus_booking_home_screen.dart';
+import 'package:busticketbooking/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,9 +42,7 @@ class _BusBookingMainPageState extends State<BusBookingMainPage> {
               Center(
                 child: Text("$index"),
               ),
-              Center(
-                child: Text("$index"),
-              ),
+              const ProfilePage(),
             ],
           ),
         ),
