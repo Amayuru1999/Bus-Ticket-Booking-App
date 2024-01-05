@@ -262,7 +262,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _selectDate(context);
+                            _selectDate(context, isReturnDate: false);
                           },
                           child: Text(
                             selectedDate != null
@@ -294,11 +294,11 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _selectDate(context);
+                            _selectDate(context, isReturnDate: true);
                           },
                           child: Text(
-                            selectedDate != null
-                                ? "${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}"
+                            returnDate != null
+                                ? "${returnDate!.day}.${returnDate!.month}.${returnDate!.year}"
                                 : "Set date",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
@@ -423,16 +423,22 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context,
+      {bool isReturnDate = false}) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
-    if (picked != null && picked != selectedDate) {
+
+    if (picked != null) {
       setState(() {
-        selectedDate = picked;
+        if (!isReturnDate) {
+          selectedDate = picked;
+        } else {
+          returnDate = picked;
+        }
       });
     }
   }
