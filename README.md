@@ -1,20 +1,36 @@
-<<<<<<< HEAD
-# busticketbooking
+# Bus Go - Bus Ticket Booking App
 
-A new Flutter project.
+Bus Go is a mobile application built using Flutter, allowing users to conveniently book bus tickets on the go. The app provides a seamless experience for users to search for bus routes, view schedules, select seats, and make hassle-free bookings.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **User Authentication**: Secure user authentication using email/password and Google Sign-In.
+- **Ticket Booking**: Search and book bus tickets for various routes.
+- **Seat Selection**: Select preferred seats from available options.
+- **Payment Integration**: Integrate payment gateways for secure transactions.
+- **View Bookings**: View booking history and upcoming trips.
+- **Profile Management**: Manage user profile details and preferences.
+- **Notifications**: Send booking confirmations and updates via push notifications.
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. **Clone Repository**: `git clone https://github.com/your-username/bus_go.git`
+2. **Navigate to Directory**: `cd bus_go`
+3. **Install Dependencies**: `flutter pub get`
+4. **Run Application**: `flutter run`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# Bus-Ticket-Booking-App
->>>>>>> c88b74e6e42988cbea9eff5cdcb2381ee38c929c
+## Technologies Used
+
+- **Flutter**: UI toolkit for building natively compiled applications for mobile, web, and desktop.
+- **Firebase**: Provides authentication, real-time database, cloud storage, and hosting services.
+- **Firebase Cloud Firestore**: Store and sync app data at a global scale.
+- **Firebase Authentication**: Securely authenticate users using email/password or Google Sign-In.
+- **Stripe/PayPal/etc.**: Integrate payment gateway for secure and smooth transactions.
+
+## Contributing
+
+We welcome contributions to improve Bus Go! Feel free to create issues or pull requests for new features, improvements, or bug fixes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
