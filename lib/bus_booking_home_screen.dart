@@ -2,6 +2,8 @@ import 'package:busticketbooking/bus_booking_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class BusBookingHomeScreen extends StatefulWidget {
   const BusBookingHomeScreen(Text text, {super.key});
@@ -16,7 +18,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
   final TextEditingController _fromTec = TextEditingController();
   final TextEditingController _toTec = TextEditingController();
   DateTime? selectedDate;
-  DateTime? returnDate;
+  TimeOfDay? selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -221,10 +223,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                     top: 16,
                     child: GestureDetector(
                       onTap: () {
-                        final tmpText = _fromTec.text;
-                        _fromTec.text = _toTec.text;
-                        _toTec.text = tmpText;
-                        setState(() {});
+                        _selectTime(context);
                       },
                       child: const Center(
                         child: CircleAvatar(
@@ -232,7 +231,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                           backgroundColor: Colors.blueAccent,
                           foregroundColor: Colors.white,
                           child: Icon(
-                            Icons.sync,
+                            Icons.access_time,
                           ),
                         ),
                       ),
@@ -243,72 +242,49 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 32),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
+                  const Text(
+                    'Set Date and Time!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _selectDateTime(context);
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Date',
-                          style: TextStyle(
+                        Text(
+                          selectedDate != null
+                              ? "Date-${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}"
+                              : "Set date",
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey,
+                            fontSize: 20,
                           ),
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            _selectDate(context, isReturnDate: false);
-                          },
-                          child: Text(
-                            selectedDate != null
-                                ? "${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}"
-                                : "Set date",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                        const SizedBox(height: 8),
+                        Text(
+                          selectedTime != null
+                              ? "Time -${selectedTime!.hour}:${selectedTime!.minute}"
+                              : "Set time",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Returning',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            _selectDate(context, isReturnDate: true);
-                          },
-                          child: Text(
-                            returnDate != null
-                                ? "${returnDate!.day}.${returnDate!.month}.${returnDate!.year}"
-                                : "Set date",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),
@@ -319,7 +295,7 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                   "Passengers",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 20,
                     color: Colors.grey,
                   ),
                 ),
@@ -381,7 +357,18 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
               height: 48,
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
+                await saveBookingData();
+                // Clear text fields
+                _fromTec.clear();
+                _toTec.clear();
+
+                // Reset date and time selections
+                setState(() {
+                  selectedDate = null;
+                  selectedTime = null;
+                });
+                // Save data to Firestore
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -423,23 +410,74 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context,
-      {bool isReturnDate = false}) async {
-    final DateTime? picked = await showDatePicker(
+  Future<void> _selectDateTime(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
 
-    if (picked != null) {
+    if (pickedDate != null) {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+
+      if (pickedTime != null) {
+        setState(() {
+          selectedDate = pickedDate;
+          selectedTime = pickedTime;
+        });
+      }
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (pickedTime != null) {
       setState(() {
-        if (!isReturnDate) {
-          selectedDate = picked;
-        } else {
-          returnDate = picked;
-        }
+        selectedTime = pickedTime;
       });
+    }
+  }
+
+  Future<void> saveBookingData() async {
+    // Get the current user
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // Reference to the Firestore collection
+
+      CollectionReference bookings =
+          FirebaseFirestore.instance.collection('bookings');
+
+      // Get the current time
+      DateTime currentTime = DateTime.now();
+      Timestamp timestamp = Timestamp.fromDate(currentTime);
+
+      // Create a map representing the booking data
+      Map<String, dynamic> bookingData = {
+        'userId': user.uid, // Include user ID in the document
+        'tripType': tripType ? 'One Way' : 'Round Trip',
+        'from': _fromTec.text,
+        'to': _toTec.text,
+        'selectedDate': selectedDate?.toIso8601String(),
+        'selectedTime': selectedTime?.format(context),
+        'passengers': _counter,
+        'bookedTime': currentTime.toIso8601String(),
+        'timestamp': timestamp,
+      };
+
+      // Add the data to the Firestore collection
+      await bookings.add(bookingData);
+    } else {
+      // Handle the case where the user is not authenticated
+      print('User is not authenticated.');
     }
   }
 }
