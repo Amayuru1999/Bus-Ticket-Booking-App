@@ -12,7 +12,32 @@ class BusBookingHomeScreen extends StatefulWidget {
   State<BusBookingHomeScreen> createState() => _BusBookingHomeScreenState();
 }
 
+class BusData {
+  final String bookedTime;
+  final String from;
+  final int passengers;
+  final String selectedDate;
+  final String selectedTime;
+  final Timestamp timestamp;
+  final String to;
+  final String tripType;
+  final String userId;
+
+  BusData({
+    required this.bookedTime,
+    required this.from,
+    required this.passengers,
+    required this.selectedDate,
+    required this.selectedTime,
+    required this.timestamp,
+    required this.to,
+    required this.tripType,
+    required this.userId,
+  });
+}
+
 class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
+  List<BusData> busDataList = [];
   bool tripType = false;
   int _counter = 0;
   final TextEditingController _fromTec = TextEditingController();
@@ -478,6 +503,49 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
     } else {
       // Handle the case where the user is not authenticated
       print('User is not authenticated.');
+    }
+    Future<void> fetchBusData() async {
+      // Get the current user
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Reference to the Firestore collection
+        CollectionReference bookings =
+            FirebaseFirestore.instance.collection('bookings');
+
+        // Fetch the data based on user preferences
+        QuerySnapshot querySnapshot = await bookings
+            .where('userId', isEqualTo: user.uid)
+            .where('from', isEqualTo: _fromTec.text)
+            .where('to', isEqualTo: _toTec.text)
+            .where('selectedDate', isEqualTo: selectedDate?.toIso8601String())
+            .where('selectedTime', isEqualTo: selectedTime?.format(context))
+            .get();
+
+        // Clear existing busDataList
+        busDataList.clear();
+
+        // Iterate through query results and add to busDataList
+        querySnapshot.docs.forEach((document) {
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+          // Add the relevant bus data to the list
+          busDataList.add(BusData(
+            bookedTime: data['bookedTime'],
+            from: data['from'],
+            passengers: data['passengers'],
+            selectedDate: data['selectedDate'],
+            selectedTime: data['selectedTime'],
+            timestamp: data['timestamp'],
+            to: data['to'],
+            tripType: data['tripType'],
+            userId: data['userId'],
+          ));
+        });
+
+        // Trigger a rebuild
+        setState(() {});
+      }
     }
   }
 }
