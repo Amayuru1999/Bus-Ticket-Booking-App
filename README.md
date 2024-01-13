@@ -14,7 +14,7 @@ Bus Go is a mobile application built using Flutter, allowing users to convenient
 
 ## Installation
 
-1. **Clone Repository**: `git clone https://github.com/your-username/bus_go.git`
+1. **Clone Repository**: `https://github.com/Amayuru1999/Bus-Ticket-Booking-App.git`
 2. **Navigate to Directory**: `cd bus_go`
 3. **Install Dependencies**: `flutter pub get`
 4. **Run Application**: `flutter run`
