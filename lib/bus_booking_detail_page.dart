@@ -19,7 +19,7 @@ class _BusBookingDetailPageState extends State<BusBookingDetailPage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.red,
         title: const Text(
-          "Dream > Walker",
+          "Available Buses!",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,

@@ -5,6 +5,8 @@ import 'package:busticketbooking/global/common/toast.dart';
 import 'package:busticketbooking/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // If you're using Firestore
@@ -19,6 +21,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final ImagePicker _picker = ImagePicker();
   final FirebaseAuthService _auth = FirebaseAuthService();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -34,6 +37,38 @@ class _SignUpPageState extends State<SignUpPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+
+        final User? user = userCredential.user;
+        Navigator.pushNamed(context, "/home");
+
+        if (user != null) {
+          // Perform actions after signing in with Google
+          // For example, you can navigate to a new screen or fetch user details
+          // You can access user details like user.displayName, user.email, etc.
+          print('Signed in with Google! User: ${user.displayName}');
+        }
+      }
+    } catch (e) {
+      print('Error signing in with Google: $e');
+      // Handle errors here
+    }
   }
 
   @override
@@ -142,6 +177,43 @@ class _SignUpPageState extends State<SignUpPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  _signInWithGoogle();
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.google,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Sign up with Google",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
