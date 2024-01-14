@@ -81,73 +81,102 @@ class _BusBookingDetailPageState extends State<BusBookingDetailPage> {
 
           // Display CSV data in Cards
           for (var row in csvData)
-            Card(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: ListTile(
-                title: Text('Bus ID: ${row[0]}'),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            InkWell(
+              onHover: (isHovered) {
+                // Add hover effect
+                setState(() {
+                  // You can use the isHovered boolean to change the appearance
+                });
+              },
+              child: Card(
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                color: const Color.fromARGB(255, 216, 216,
+                    216), // Set background color based on service type
+                child: Column(
                   children: [
-                    Text('Bus Type: ${row[1]}'),
-                    Text('From: ${row[2]}'),
-                    Text('To: ${row[3]}'),
-                    Text('Arrival Time: ${row[4]}'),
-                    Text('Departure Time: ${row[5]}'),
-                    Text('Driver Id: ${row[6]}'),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: getServiceColor(row[
+                            1]), // Set background color based on service type
+                        borderRadius: BorderRadius.circular(
+                            10), // Adjust the radius as needed
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        '${row[1]}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('From: ${row[2]}'),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('To: ${row[3]}'),
+                          Text('Arrival Time: ${row[4]}'),
+                          Text('Departure Time: ${row[5]}'),
+                          Text('Driver Id: ${row[6]}'),
+                          Text('Bus No.: ${row[0]}'),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Handle button tap
+
+                        Navigator.pushNamed(context, "/seat");
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.blue, // Set the color of the button
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Text(
+                          'Book',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
 
           const Divider(),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, "/seat");
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(32),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: const Center(
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "12.90 €",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      TextSpan(
-                        text: " per ticket",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
   }
-}
 
-Future<String> getCSVDownloadUrl(String fileName) async {
-  Reference reference = FirebaseStorage.instance.ref().child(fileName);
-  return await reference.getDownloadURL();
-}
+  Color getServiceColor(String serviceType) {
+    // Determine color based on service type
+    switch (serviceType.toLowerCase()) {
+      case 'semi luxury':
+        return Colors.lightBlue;
+      case 'luxury':
+        return Colors.lightGreen;
+      case 'super luxury':
+        return Colors.purple;
+      default:
+        // Default color for Normal Services
+        return Colors.red;
+    }
+  }
 
-Future<List<List<dynamic>>> parseCSVFromUrl(String url) async {
-  final response = await http.get(Uri.parse(url));
-  final String csvString = response.body;
-  return CsvToListConverter().convert(csvString);
+  Future<String> getCSVDownloadUrl(String fileName) async {
+    Reference reference = FirebaseStorage.instance.ref().child(fileName);
+    return await reference.getDownloadURL();
+  }
+
+  Future<List<List<dynamic>>> parseCSVFromUrl(String url) async {
+    final response = await http.get(Uri.parse(url));
+    final String csvString = response.body;
+    return CsvToListConverter().convert(csvString);
+  }
 }
