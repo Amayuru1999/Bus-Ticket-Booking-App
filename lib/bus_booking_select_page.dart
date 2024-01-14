@@ -23,7 +23,7 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            context.pop();
+            Navigator.pushNamed(context, "/detail");
           },
           color: Colors.red,
         ),

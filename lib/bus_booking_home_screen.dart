@@ -34,6 +34,21 @@ class BusData {
     required this.tripType,
     required this.userId,
   });
+  static BusData fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    Map<String, dynamic> data = snapshot.data()!;
+    return BusData(
+      bookedTime: data['bookedTime'],
+      from: data['from'],
+      passengers: data['passengers'],
+      selectedDate: data['selectedDate'],
+      selectedTime: data['selectedTime'],
+      timestamp: data['timestamp'],
+      to: data['to'],
+      tripType: data['tripType'],
+      userId: data['userId'],
+    );
+  }
 }
 
 class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
