@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:ui';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Firebase',
       routes: {
         '/': (context) => const SplashScreen(
-              child: LoginPage(),
+              child: BusBookingDetailPage(),
             ),
         '/login': (context) => LoginPage(),
         '/signUp': (context) => SignUpPage(),
