@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Firebase',
       routes: {
         '/': (context) => const SplashScreen(
-              child: BusBookingDetailPage(),
+              child: LoginPage(),
             ),
         '/login': (context) => LoginPage(),
         '/signUp': (context) => SignUpPage(),
