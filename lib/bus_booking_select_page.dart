@@ -48,7 +48,7 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                   ),
                 ),
                 const Text(
-                  "Standard",
+                  "Booked",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -63,45 +63,45 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                   ),
                 ),
                 const Text(
-                  "Premium",
+                  "Available",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),
                 ),
-                Container(
-                  height: 32,
-                  width: 32,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[400],
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.clear,
-                    ),
-                  ),
-                ),
-                const Text(
-                  "Taken",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
+                // Container(
+                //   height: 32,
+                //   width: 32,
+                //   decoration: BoxDecoration(
+                //     color: Colors.grey[400],
+                //     borderRadius: BorderRadius.circular(4),
+                //   ),
+                //   child: const Center(
+                //     child: Icon(
+                //       Icons.clear,
+                //     ),
+                //   ),
+                // ),
+                // const Text(
+                //   "Taken",
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.bold,
+                //     fontSize: 15,
+                //   ),
+                // ),
               ],
             ),
           ),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.all(16),
+              margin: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(42.0),
+                  padding: const EdgeInsets.all(40.0),
                   child: Column(
                     children: [
                       Row(
@@ -117,75 +117,171 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                               ),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Center(
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
                                 ),
-                              ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '1',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
                             height: 48,
                             width: 48,
+                            margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "2",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
                               ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '2',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '3',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const Spacer(),
                           Container(
-                            margin: const EdgeInsets.only(right: 16),
                             height: 48,
                             width: 48,
+                            margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "3",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
                               ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '4',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
                             height: 48,
                             width: 48,
+                            margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "4",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
                               ),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                          )
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '5',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -199,116 +295,176 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                             margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.orange,
+                                color: Colors.red,
                                 width: 3,
                               ),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Center(
-                              child: Text(
-                                "5",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
                                 ),
-                              ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '6',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
                             height: 48,
                             width: 48,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.orange,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "6",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
                             margin: const EdgeInsets.only(right: 16),
-                            height: 48,
-                            width: 48,
                             decoration: BoxDecoration(
-                              color: Colors.grey[400]!,
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.clear,
-                              ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '7',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
                             height: 48,
                             width: 48,
+                            margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.orange,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "8",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
                               ),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 48,
-                            width: 96 + 12,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[400],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Table",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
                                 ),
-                              ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '8',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const Spacer(),
                           Container(
                             height: 48,
-                            width: 96 + 12,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
-                              color: Colors.grey[400],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Table",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
                               ),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                          )
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '9',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '10',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -322,25 +478,104 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                             margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.orange,
+                                color: Colors.red,
                                 width: 3,
                               ),
-                              color: Colors.orange,
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Center(
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
                                 ),
-                              ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '11',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const _GeneralSeatComponent(
-                            borderColor: Colors.orange,
-                            title: "10",
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '12',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '13',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           const Spacer(),
                           Container(
@@ -349,139 +584,1350 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                             margin: const EdgeInsets.only(right: 16),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.orange,
+                                color: Colors.red,
                                 width: 3,
                               ),
-                              // color: Colors.orange,
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Center(
-                              child: Text(
-                                "11",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
                                 ),
-                              ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '14',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const _TakenSeatComponent(),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Row(
-                        children: [
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "13",
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "14",
-                            marginRight: 0,
-                          ),
-                          Spacer(),
-                          _TakenSeatComponent(
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Row(
-                        children: [
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "17",
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(),
-                          Spacer(),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "19",
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "20",
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '15',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const Row(
+                      Row(
                         children: [
-                          _TakenSeatComponent(
-                            marginRight: 16,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '16',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "22",
-                            marginRight: 0,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '17',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                          _TakenSeatComponent(
-                            marginRight: 16,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '18',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          _TakenSeatComponent(
-                            marginRight: 0,
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '19',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '20',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const Row(
+                      Row(
                         children: [
-                          _TakenSeatComponent(
-                            marginRight: 16,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '21',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          _TakenSeatComponent(
-                            marginRight: 0,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '22',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "27",
-                            marginRight: 16,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '23',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "28",
-                            marginRight: 0,
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '24',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '25',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const Row(
+                      Row(
                         children: [
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "29",
-                            marginRight: 16,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '26',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "30",
-                            marginRight: 0,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '27',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "31",
-                            marginRight: 16,
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '28',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          _TakenSeatComponent(
-                            marginRight: 0,
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '29',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '30',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '31',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '32',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '33',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '34',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '35',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '36',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '37',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '38',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '39',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '40',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '41',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '42',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '43',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '44',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '45',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '46',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '47',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '48',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '49',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 48,
+                            width: 48,
+                            margin: const EdgeInsets.only(right: 16),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/seat.png', // Replace with the actual path to your image asset
+                                    fit: BoxFit
+                                        .contain, // Adjust the BoxFit as needed
+                                  ),
+                                ),
+                                const Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '50',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
