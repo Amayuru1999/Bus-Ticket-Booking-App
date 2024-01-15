@@ -1,6 +1,6 @@
-// clickable_seat.dart
-
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ClickableSeat extends StatefulWidget {
   final String seatNumber;
@@ -21,6 +21,7 @@ class _ClickableSeatState extends State<ClickableSeat> {
         setState(() {
           isClicked = !isClicked;
         });
+        _onSeatClicked();
       },
       child: Container(
         height: 48,
@@ -59,5 +60,53 @@ class _ClickableSeatState extends State<ClickableSeat> {
         ),
       ),
     );
+  }
+
+  void _onSeatClicked() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      final bookedTime = Timestamp.now();
+      final selectedSeatNumber = int.parse(widget.seatNumber);
+
+      // Retrieve existing data for the user's seat document
+      final userSeatDoc = await FirebaseFirestore.instance
+          .collection('seats')
+          .doc(user.uid)
+          .get();
+
+      // Check if the user's seat document already exists
+      if (userSeatDoc.exists) {
+        // User's seat document already exists, update the existing data
+        final existingData = userSeatDoc.data() as Map<String, dynamic>;
+        List<int> updatedSeatNumbers =
+            List<int>.from(existingData['seatNumbers'] ?? []);
+
+        // Check if the seat is already selected
+        if (updatedSeatNumbers.contains(selectedSeatNumber)) {
+          // Seat is already selected, remove it
+          updatedSeatNumbers.remove(selectedSeatNumber);
+        } else {
+          // Seat is not selected, add it
+          updatedSeatNumbers.add(selectedSeatNumber);
+        }
+
+        await FirebaseFirestore.instance.collection('seats').doc(user.uid).set({
+          'bookedTime': bookedTime,
+          'seatCount': updatedSeatNumbers.length,
+          'seatNumbers': updatedSeatNumbers,
+        });
+      } else {
+        // User's seat document does not exist, create a new entry
+        await FirebaseFirestore.instance.collection('seats').doc(user.uid).set({
+          'bookedTime': bookedTime,
+          'seatCount': 1,
+          'seatNumbers': [selectedSeatNumber],
+        });
+      }
+    } else {
+      // Handle the case when the user is not logged in
+      // You might want to show a login screen or handle it differently
+    }
   }
 }

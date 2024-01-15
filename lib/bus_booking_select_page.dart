@@ -1,4 +1,6 @@
 import 'package:busticketbooking/my_clickable_box.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'clickable_seat.dart';
@@ -11,6 +13,8 @@ class BusBookingSelectPage extends StatefulWidget {
 }
 
 class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
+  List<String> selectedSeats = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -230,13 +234,6 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
             ),
             child: Row(
               children: [
-                const Text(
-                  "Seat: 1/1",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
                 const SizedBox(
                   width: 24,
                 ),
@@ -247,13 +244,18 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                       color: Color.fromARGB(255, 17, 168, 255),
                       borderRadius: BorderRadius.circular(32),
                     ),
-                    child: const Center(
-                      child: Text(
-                        "Confirm",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                    child: InkWell(
+                      onTap: () {
+                        _confirmSeats();
+                      },
+                      child: const Center(
+                        child: Text(
+                          "Confirm",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -265,5 +267,64 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
         ),
       ),
     );
+  }
+
+  void _confirmSeats() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && selectedSeats.isNotEmpty) {
+      final batch = FirebaseFirestore.instance.batch();
+
+      // Generate a timestamp for the bookedTime field
+      final bookedTime = Timestamp.now();
+
+      // Calculate seatCount and seatNumbers based on selectedSeats
+      final seatCount = selectedSeats.length;
+      final seatNumbers =
+          selectedSeats.map((seatNumber) => int.parse(seatNumber)).toList();
+
+      // Combine seat numbers into a string
+      final seatNumbersString = seatNumbers.join(', ');
+
+      // Create a unique booking ID using a combination of user ID and timestamp
+      final bookingId = "${user.uid}_${bookedTime.seconds}";
+
+      // Update each selected seat with the booking details
+      for (final seatNumber in selectedSeats) {
+        batch.set(
+          FirebaseFirestore.instance.collection('seats').doc(seatNumber),
+          {
+            'bookedTime': bookedTime,
+            'seatCount': seatCount,
+            'seatNumbers': seatNumbersString,
+            'userId': user.uid,
+            'bookingId': bookingId,
+          },
+        );
+      }
+
+      // Remove deselected seats from the seatNumbers field
+      final allSeats =
+          await FirebaseFirestore.instance.collection('seats').get();
+
+      for (final seatDoc in allSeats.docs) {
+        final seatNumber = int.parse(seatDoc.id);
+
+        if (!selectedSeats.contains(seatNumber.toString())) {
+          batch.update(
+            FirebaseFirestore.instance
+                .collection('seats')
+                .doc(seatNumber.toString()),
+            {
+              'seatNumbers': FieldValue.arrayRemove([seatNumber]),
+            },
+          );
+        }
+      }
+
+      await batch.commit();
+    } else {
+      // Handle the case when the user is not logged in or no seats are selected
+    }
   }
 }
