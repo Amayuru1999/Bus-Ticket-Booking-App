@@ -48,7 +48,7 @@ class _ClickableSeatState extends State<ClickableSeat> {
                 child: Text(
                   widget
                       .seatNumber, // Use widget.seatNumber here to display the seat number
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     color: Colors.black,
