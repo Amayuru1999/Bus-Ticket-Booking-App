@@ -1,6 +1,7 @@
 import 'package:busticketbooking/bus_booking_detail_page.dart';
 import 'package:busticketbooking/bus_booking_main_page.dart';
 import 'package:busticketbooking/bus_booking_select_page.dart';
+import 'package:busticketbooking/bus_ticket_screen.dart';
 import 'package:busticketbooking/home_page.dart';
 import 'package:busticketbooking/login_page.dart';
 import 'package:busticketbooking/sign_up_page.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       color: Colors.blueAccent,
       title: 'Flutter Firebase',
       routes: {
-        '/': (context) => const SplashScreen(
+        '/': (context) => SplashScreen(
               child: LoginPage(),
             ),
         '/login': (context) => LoginPage(),
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomePage(),
         '/bus_booking_main_page': (context) => const BusBookingMainPage(),
         '/detail': (context) => BusBookingDetailPage(),
-        '/seat': (context) => BusBookingSelectPage()
+        '/seat': (context) => BusBookingSelectPage(),
+        '/price': (context) => BusTicketScreen()
       },
     );
   }

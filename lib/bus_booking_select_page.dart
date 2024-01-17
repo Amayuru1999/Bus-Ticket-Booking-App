@@ -247,6 +247,7 @@ class _BusBookingSelectPageState extends State<BusBookingSelectPage> {
                     child: InkWell(
                       onTap: () {
                         _confirmSeats();
+                        Navigator.pushNamed(context, "/price");
                       },
                       child: const Center(
                         child: Text(
