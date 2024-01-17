@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
           _user = user;
           _userData = userData.data() as Map<String, dynamic>;
           _nameController.text = _userData['username'] ?? '';
-          _emailController.text = _user!.email ?? '';
+          _emailController.text = _user?.email ?? '';
           _dobController.text = _userData['dob'] ?? '';
         });
       }
@@ -157,7 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   )
                                 : Text(
-                                    '${_user!.email}',
+                                    '${_user?.email ?? 'N/A'}',
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
@@ -187,7 +187,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                            // Add other fields as needed based on your Firestore schema
                           ],
                         ),
                       ),

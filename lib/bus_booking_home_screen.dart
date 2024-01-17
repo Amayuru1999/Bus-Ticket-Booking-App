@@ -21,7 +21,6 @@ class BusData {
   final Timestamp timestamp;
   final String to;
   final String tripType;
-  final String userId;
 
   BusData({
     required this.bookedTime,
@@ -32,7 +31,6 @@ class BusData {
     required this.timestamp,
     required this.to,
     required this.tripType,
-    required this.userId,
   });
   static BusData fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
@@ -46,7 +44,6 @@ class BusData {
       timestamp: data['timestamp'],
       to: data['to'],
       tripType: data['tripType'],
-      userId: data['userId'],
     );
   }
 }
@@ -512,9 +509,10 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
         'bookedTime': currentTime.toIso8601String(),
         'timestamp': timestamp,
       };
-
-      // Add the data to the Firestore collection
-      await bookings.add(bookingData);
+// Use the user's UID as the document ID
+      String documentId = user.uid;
+      // Add the data to the Firestore collection with the specified document ID
+      await bookings.doc(documentId).set(bookingData);
     } else {
       // Handle the case where the user is not authenticated
       print('User is not authenticated.');
@@ -554,7 +552,6 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
             timestamp: data['timestamp'],
             to: data['to'],
             tripType: data['tripType'],
-            userId: data['userId'],
           ));
         });
 

@@ -30,33 +30,27 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      // Fetch data from 'seats' collection
-      final userSeatDoc = await FirebaseFirestore.instance
-          .collection('seats')
-          .doc(user.uid)
-          .get();
+      try {
+        // Fetch data from 'seats' collection
+        final userSeatDoc = await FirebaseFirestore.instance
+            .collection('seats')
+            .doc(user.uid)
+            .get();
 
-      if (userSeatDoc.exists) {
-        final seatsData = userSeatDoc.data() as Map<String, dynamic>;
+        if (userSeatDoc.exists) {
+          final seatsData = userSeatDoc.data() as Map<String, dynamic>;
 
-        // Convert Timestamp to String
-        final bookedTime = seatsData['bookedTime'] as Timestamp;
-        final bookedTimeString = bookedTime.toDate().toString();
+          // Convert Timestamp to String
+          final bookedTime = seatsData['bookedTime'] as Timestamp;
+          final bookedTimeString = bookedTime.toDate().toString();
 
-        setState(() {
-          bookedTimeSeats = DateTime.parse(bookedTimeString);
-          seatCount = seatsData['seatCount'] ?? 0;
-          seatNumbers = List<int>.from(seatsData['seatNumbers'] ?? []);
-        });
-      }
+          setState(() {
+            bookedTimeSeats = DateTime.parse(bookedTimeString);
+            seatCount = seatsData['seatCount'] ?? 0;
+            seatNumbers = List<int>.from(seatsData['seatNumbers'] ?? []);
+          });
+        }
 
-      // Fetch data from 'bookings' collection
-      final userBookingDoc = await FirebaseFirestore.instance
-          .collection('bookings')
-          .doc(user.uid)
-          .get();
-
-      if (user != null) {
         // Fetch data from 'bookings' collection
         final userBookingDoc = await FirebaseFirestore.instance
             .collection('bookings')
@@ -65,14 +59,13 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
 
         if (userBookingDoc.exists) {
           final bookingsData = userBookingDoc.data() as Map<String, dynamic>;
-          print('Bookings Data: $bookingsData');
 
           // Convert Timestamp to String
           final bookedTimeBooking = bookingsData['timestamp'] as Timestamp;
           final bookedTimeBookingString = bookedTimeBooking.toDate().toString();
 
           setState(() {
-            // bookedTimeBookings = DateTime.parse(bookedTimeBookingString);
+            bookedTimeBookings = DateTime.parse(bookedTimeBookingString);
             from = bookingsData['from'];
             to = bookingsData['to'];
             passengers = bookingsData['passengers'] ?? 0;
@@ -84,6 +77,10 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
           print(
               'No data found in the "bookings" collection for user: ${user.uid}');
         }
+      } catch (e, stackTrace) {
+        print('Error fetching bus ticket data: $e');
+        print(stackTrace);
+        // Handle the error as needed (e.g., show a message to the user)
       }
     }
   }
@@ -107,83 +104,79 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Seats Information',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                    ),
-                  ),
                   SizedBox(height: 10),
                   Text(
-                    'Booked Time: ${bookedTimeSeats.toLocal()}',
+                    'Boarding: $from',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 32, 8, 255),
+                    ),
+                  ),
+                  Text(
+                    'Dropping: $to',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 32, 8, 255),
+                    ),
+                  ),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.black,
+                    height: 20,
+                  ),
+                  Text(
+                    'Seat Numbers: ${seatNumbers.join(', ')}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'Seat Count: $seatCount',
                     style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    'Seat Numbers: ${seatNumbers.join(', ')}',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Bookings Information',
-                    style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Booked Time: ${bookedTimeBookings.toLocal()}',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    'From: $from',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    'To: $to',
-                    style: TextStyle(
-                      fontSize: 16,
                     ),
                   ),
                   Text(
                     'Passengers: $passengers',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
+                  ),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.black,
+                    height: 20,
                   ),
                   Text(
                     'Selected Date: $selectedDate',
                     style: TextStyle(
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'Selected Time: $selectedTime',
                     style: TextStyle(
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  // Text(
+                  //   'Trip Type: $tripType',
+                  //   style: TextStyle(
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
                   Text(
-                    'Trip Type: $tripType',
+                    'Booked Time: ${bookedTimeSeats.toLocal()}',
                     style: TextStyle(
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 20),
