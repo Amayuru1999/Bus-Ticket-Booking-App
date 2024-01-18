@@ -187,7 +187,7 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red, // Change button color to red
                     ),
-                    child: Text(
+                    child: const Text(
                       'Cancel Booking',
                       style: TextStyle(
                         fontSize: 16,
@@ -195,6 +195,38 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                       ),
                     ),
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Implement any action you want when the button is pressed
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Set button color to green
+                      padding: EdgeInsets.symmetric(
+                          vertical: 15), // Adjust button padding
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            10), // Set button border radius
+                      ),
+                      elevation: 5, // Add elevation for a shadow effect
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.shopping_cart,
+                            size: 24), // Add a shopping cart icon
+                        SizedBox(
+                            width:
+                                10), // Add some spacing between icon and text
+                        Text(
+                          'Checkout',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
