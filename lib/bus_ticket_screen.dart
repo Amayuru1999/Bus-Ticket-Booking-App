@@ -187,29 +187,37 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                       Navigator.pushNamed(context, "/payment");
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 8, 255, 222),
+                      primary: Color.fromARGB(255, 8, 177, 255),
                       padding: EdgeInsets.symmetric(vertical: 15),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(40),
                       ),
                       elevation: 5,
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.directions_bus_filled, size: 24),
-                        SizedBox(width: 10),
+                        Icon(
+                          Icons.directions_bus_filled,
+                          size: 30,
+                          color: Colors.black,
+                        ), // Set the size to match the font size
+                        SizedBox(width: 20),
                         Text(
                           'Checkout',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
                         SizedBox(
-                            width: 5), // Add spacing between text and arrow
-                        Icon(Icons.arrow_forward,
-                            size: 20), // Add horizontal arrow
+                            width: 20), // Add spacing between text and arrow
+                        Icon(
+                          Icons.arrow_circle_right_sharp,
+                          size: 40,
+                          color: Colors.black,
+                        ), // Set the size to match the font size
                       ],
                     ),
                   ),

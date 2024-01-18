@@ -7,6 +7,7 @@ import 'package:busticketbooking/login_page.dart';
 import 'package:busticketbooking/payment.dart';
 import 'package:busticketbooking/sign_up_page.dart';
 import 'package:busticketbooking/splash_screen/splash_screen.dart';
+import 'package:busticketbooking/ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Firebase',
       routes: {
         '/': (context) => SplashScreen(
-              child: LoginPage(),
+              child: Ticket(),
             ),
         '/login': (context) => LoginPage(),
         '/signUp': (context) => SignUpPage(),
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
         '/detail': (context) => BusBookingDetailPage(),
         '/seat': (context) => BusBookingSelectPage(),
         '/price': (context) => BusTicketScreen(),
-        '/payment': (context) => PaymentScreen()
+        '/payment': (context) => PaymentScreen(),
+        '/ticket': (context) => Ticket()
       },
     );
   }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  const PaymentScreen({Key? key}) : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -65,19 +65,60 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Add a back arrow button to the AppBar
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Navigate back when the back arrow button is pressed
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Payment'), // Set your desired title
+        title: Text(
+          'Payment',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.blue,
+        elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Center(child: Platform.isIOS ? applePayButton : googlePayButton),
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Select Payment Method',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Icon(
+                    Icons.arrow_circle_right_sharp,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              InkWell(
+                onTap: () {
+                  // Handle the tap event for Apple Pay button
+                  Navigator.pushNamed(context, "/payment");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Platform.isIOS ? applePayButton : googlePayButton,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
