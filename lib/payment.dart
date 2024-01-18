@@ -64,6 +64,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // Add a back arrow button to the AppBar
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Navigate back when the back arrow button is pressed
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Text('Payment'), // Set your desired title
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Center(child: Platform.isIOS ? applePayButton : googlePayButton),

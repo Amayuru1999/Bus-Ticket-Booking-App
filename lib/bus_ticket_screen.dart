@@ -147,21 +147,21 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 2,
                     color: Colors.black,
                     height: 20,
                   ),
                   Text(
                     'Selected Date: $selectedDate',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'Selected Time: $selectedTime',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -180,6 +180,46 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
+                  SizedBox(height: 20),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/payment");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 8, 255, 222),
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 5,
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.directions_bus_filled, size: 24),
+                        SizedBox(width: 10),
+                        Text(
+                          'Checkout',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                            width: 5), // Add spacing between text and arrow
+                        Icon(Icons.arrow_forward,
+                            size: 20), // Add horizontal arrow
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 20),
+                  SizedBox(height: 20),
+                  SizedBox(height: 20),
+                  SizedBox(height: 20),
+                  SizedBox(height: 20),
+
                   ElevatedButton(
                     onPressed: () {
                       // Implement any action you want when the button is pressed
@@ -195,38 +235,6 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Implement any action you want when the button is pressed
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Set button color to green
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15), // Adjust button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10), // Set button border radius
-                      ),
-                      elevation: 5, // Add elevation for a shadow effect
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.shopping_cart,
-                            size: 24), // Add a shopping cart icon
-                        SizedBox(
-                            width:
-                                10), // Add some spacing between icon and text
-                        Text(
-                          'Checkout',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),

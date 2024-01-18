@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
         '/bus_booking_main_page': (context) => const BusBookingMainPage(),
         '/detail': (context) => BusBookingDetailPage(),
         '/seat': (context) => BusBookingSelectPage(),
-        '/price': (context) => BusTicketScreen()
+        '/price': (context) => BusTicketScreen(),
+        '/payment': (context) => PaymentScreen()
       },
     );
   }
