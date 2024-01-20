@@ -215,6 +215,11 @@ class _TicketState extends State<Ticket> {
                     height: 20,
                   ),
                   generateCodeImages(generateTicketID()),
+                  ElevatedButton(
+                      onPressed: () {
+                        _uploadTicketToFirestore();
+                      },
+                      child: Text('Save Ticket to Firestore')),
                 ],
               ),
             ),
@@ -222,5 +227,37 @@ class _TicketState extends State<Ticket> {
         ),
       ),
     );
+  }
+
+  Future<void> _uploadTicketToFirestore() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        final ticketData = {
+          'ticketID': generateTicketID(),
+          'from': from,
+          'to': to,
+          'selectedDate': selectedDate,
+          'selectedTime': selectedTime,
+          'passengers': passengers,
+          'tripType': tripType,
+          'seatCount': seatCount,
+          'seatNumbers': seatNumbers,
+          'bookedTimeSeats': bookedTimeSeats,
+          'bookedTimeBookings': bookedTimeBookings,
+        };
+
+        await FirebaseFirestore.instance
+            .collection('tickets')
+            .doc(user.uid)
+            .set(ticketData);
+
+        print('Ticket data uploaded successfully!');
+      } catch (e, stackTrace) {
+        print('Error uploading ticket data to Firestore: $e');
+        print(stackTrace);
+      }
+    }
   }
 }
