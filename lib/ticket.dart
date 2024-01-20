@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 
 class Ticket extends StatefulWidget {
   @override
@@ -83,12 +84,41 @@ class _TicketState extends State<Ticket> {
     return DateTime.now().millisecondsSinceEpoch.toString();
   }
 
-  generateQRCodeImage(String data) {
-    return QrImageView(
-      data: data,
-      version: QrVersions.auto,
-      size: 320,
-      gapless: false,
+  generateCodeImages(String data) {
+    return Column(
+      children: [
+        Text(
+          'QR Code:',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 10),
+        QrImageView(
+          data: data,
+          version: QrVersions.auto,
+          size: 320,
+          gapless: false,
+        ),
+        SizedBox(height: 20),
+        Text(
+          'Barcode:',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 10),
+        BarcodeWidget(
+          barcode: Barcode.code128(),
+          color: Colors.black,
+          data: data,
+          width: 200,
+          height: 50,
+        ),
+        SizedBox(height: 20),
+      ],
     );
   }
 
@@ -96,7 +126,7 @@ class _TicketState extends State<Ticket> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bus Ticket'),
+        title: Text('Bus Go Payment Invoice'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -111,8 +141,11 @@ class _TicketState extends State<Ticket> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
-                  // ... existing ticket information
+                  Image.asset(
+                    'assets/logo.png', // Replace 'your_logo.png' with your actual logo asset path
+                    height: 100,
+                    width: 400, // Adjust the height as needed
+                  ),
 
                   Text(
                     'Ticket ID: ${generateTicketID()}',
@@ -127,15 +160,61 @@ class _TicketState extends State<Ticket> {
                     height: 20,
                   ),
                   Text(
-                    'QR Code:',
+                    'TRAVEL DETAILS',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 10),
-                  generateQRCodeImage(generateTicketID()),
-                  SizedBox(height: 20),
+                  // Display additional travel details
+                  Text('Boarding: $from'),
+                  Text('Dropping: $to'),
+                  Text('Date: $selectedDate'),
+                  Text('Time: $selectedTime'),
+                  Text('Passengers: $passengers'),
+                  Text('Trip Type: $tripType'),
+
+                  Divider(
+                    thickness: 2,
+                    color: Colors.black,
+                    height: 20,
+                  ),
+                  Text(
+                    'SEATES BOOKED',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  // Display seat information
+                  Text('Seat Count: $seatCount'),
+                  Text('Seat Numbers: ${seatNumbers.join(', ')}'),
+
+                  Divider(
+                    thickness: 2,
+                    color: Colors.black,
+                    height: 20,
+                  ),
+                  Text(
+                    'BOOKING TIMESTAMP',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  // Display booking timestamps
+                  Text('Seats Booked Time: $bookedTimeSeats'),
+                  Text('Booking Time: $bookedTimeBookings'),
+
+                  Divider(
+                    thickness: 2,
+                    color: Colors.black,
+                    height: 20,
+                  ),
+                  generateCodeImages(generateTicketID()),
                 ],
               ),
             ),

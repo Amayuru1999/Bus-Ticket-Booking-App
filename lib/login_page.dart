@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Login"),
+        title: const Text(""),
       ),
       body: SingleChildScrollView(
         // Wrap the body with SingleChildScrollView
@@ -43,6 +43,14 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/logo.png', // Replace 'your_logo.png' with your actual logo asset path
+                  height: 100,
+                  width: 400, // Adjust the height as needed
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 const Text(
                   "Login",
                   style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),

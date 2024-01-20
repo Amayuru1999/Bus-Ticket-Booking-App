@@ -187,7 +187,7 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                       Navigator.pushNamed(context, "/payment");
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 8, 177, 255),
+                      backgroundColor: Color.fromARGB(255, 8, 177, 255),
                       padding: EdgeInsets.symmetric(vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
@@ -233,7 +233,7 @@ class _BusTicketScreenState extends State<BusTicketScreen> {
                       // Implement any action you want when the button is pressed
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red, // Change button color to red
+                      backgroundColor: Colors.red, // Change button color to red
                     ),
                     child: const Text(
                       'Cancel Booking',
