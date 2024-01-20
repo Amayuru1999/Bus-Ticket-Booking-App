@@ -303,22 +303,22 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                         Text(
                           selectedDate != null
                               ? "Date-${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}"
-                              : "Set date",
+                              : "Date & Time",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Text(
-                          selectedTime != null
-                              ? "Time -${selectedTime!.hour}:${selectedTime!.minute}"
-                              : "Set time",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
+                        // Text(
+                        //   selectedTime != null
+                        //       ? "Time -${selectedTime!.hour}:${selectedTime!.minute}"
+                        //       : "Set time",
+                        //   style: const TextStyle(
+                        //     fontWeight: FontWeight.bold,
+                        //     fontSize: 20,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

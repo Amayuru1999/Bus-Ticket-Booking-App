@@ -64,6 +64,9 @@ dependencies:
   pay: ^1.1.2
   
   qr_flutter: ^4.0.0
+  stripe_checkout: ^1.0.2
+  barcode_widget: ^2.0.4
+  pdf: ^3.10.7
 
   
   
@@ -100,6 +103,7 @@ flutter:
   assets:
     - assets/arrow.png
     - assets/seat.png
+    - assets/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
