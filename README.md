@@ -32,5 +32,4 @@ Bus Go is a mobile application built using Flutter, allowing users to convenient
 We welcome contributions to improve Bus Go! Feel free to create issues or pull requests for new features, improvements, or bug fixes.
 
 ## License
-
 This project is licensed under the [MIT License](LICENSE).
